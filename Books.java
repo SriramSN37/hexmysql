@@ -1,12 +1,11 @@
 import java.util.Scanner;
-
-
 public class Books {
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String books[]=new String[50];
         double price[]=new double[50];
         int qty[]=new int[50];
+        int c=0; 
         while(true)
             {
                 System.out.println("enter your choice");
@@ -26,13 +25,14 @@ public class Books {
                     double p=sc.nextDouble();
                     System.out.println("enter book quantity");
                     int q=sc.nextInt();
-                    for(int i=0;i<50;i++)
+                    for(int i=0;i<=c;i++)
                     {
                         if(books[i]==null)
                         {
                             books[i]=name;
                             price[i]=p;
                             qty[i]=q;
+                            c++;
                             break;
                         }
                     }
@@ -42,7 +42,7 @@ public class Books {
                     System.out.println("enter book name");
                     sc.nextLine();
                     String name=sc.nextLine();
-                    for(int i=0;i<50;i++)
+                    for(int i=0;i<=c;i++)
                     {
                         if(name.equals(books[i]))
                         {
@@ -59,7 +59,7 @@ public class Books {
                     System.out.println("enter book name");
                     sc.nextLine();
                     String name=sc.nextLine();
-                    for(int i=0;i<50;i++)
+                    for(int i=0;i<=c;i++)
                     {
                         if(name.equals(books[i]))
                         {
@@ -77,7 +77,7 @@ public class Books {
                     String name=sc.nextLine();
                     System.out.println("enter new price");
                     double p=sc.nextDouble();
-                    for(int i=0;i<50;i++)
+                    for(int i=0;i<=c;i++)
                     {
                         if(name.equals(books[i]))
                         {
@@ -88,7 +88,7 @@ public class Books {
                 }
                 else if(ch==5)
                 {
-                    for(int i=0;i<50;i++)
+                    for(int i=0;i<=c;i++)
                     {
                         if(books[i]!=null)
                         {
@@ -104,7 +104,7 @@ public class Books {
                 }
                 else
                 {
-                    System.out.println("invalid choice");
+                   System.out.println("invalid choice");
                 }
             }
     }
