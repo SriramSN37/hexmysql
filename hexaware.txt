@@ -178,3 +178,490 @@ Tasks 4: Subquery and its types
 
 12. select v.venue_name,(select avg(ticket_price) from event where venue_id = v.venue_id) from venue v;
 
+Control structure
+Task 1: Conditional Statements
+
+import java.util.Scanner;
+public class BookingSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of available tickets: ");
+        int availableTickets = scanner.nextInt();
+        System.out.print("Enter the number of tickets to book: ");
+        int noOfBookingTicket = scanner.nextInt();
+        if (availableTickets >= noOfBookingTicket) {
+            int remainingTickets = availableTickets - noOfBookingTicket;
+            System.out.println("Tickets booked successfully!");
+            System.out.println("Remaining tickets: " + remainingTickets);
+        } else {
+            System.out.println("Tickets unavailable. Available tickets: " + availableTickets);
+        }
+
+    }
+}
+
+Task 2: Nested Conditional Statements
+
+import java.util.Scanner;
+public class TicketBookingSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ticket Options:");
+        System.out.println("1. Silver");
+        System.out.println("2. Gold");
+        System.out.println("3. Diamond");
+        System.out.print("Enter the ticket type (1 for Silver, 2 for Gold, 3 for Diamond): ");
+        int ticketType = scanner.nextInt();
+        System.out.print("Enter the number of tickets needed: ");
+        int noOfTickets = scanner.nextInt();
+
+        double basePrice = 0;
+        switch (ticketType) {
+            case 1:
+                basePrice = 10.0;
+                break;
+            case 2:
+                basePrice = 50.0;
+                break;
+            case 3:
+                basePrice = 80.0; 
+                break;
+            default:
+                System.out.println("Invalid ticket type!");
+                System.exit(1);
+        }
+        double totalCost = basePrice * noOfTickets;
+        System.out.println("Total cost of " + noOfTickets + " " + " tickets: Rs." + totalCost);
+    }
+
+Task 3: Looping
+
+import java.util.Scanner;
+public class TicketBookingSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        do {
+            System.out.println("Ticket Options:");
+            System.out.println("1. Silver");
+            System.out.println("2. Gold");
+            System.out.println("3. Diamond");
+            System.out.print("Enter the ticket type (1 for Silver, 2 for Gold, 3 for Diamond), or type 'Exit' to quit: ");
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("Exit")) {
+                break;
+            }
+            int ticketType;
+            ticketType = Integer.parseInt(input);
+            System.out.print("Enter the number of tickets needed: ");
+            int noOfTickets = scanner.nextInt();
+            scanner.nextLine(); 
+            double basePrice = 0;
+            switch (ticketType) {
+                case 1:
+                    basePrice = 20.0; 
+                    break;
+                case 2:
+                    basePrice = 50.0; 
+                    break;
+                case 3:
+                    basePrice = 80.0; 
+                    break;
+            }
+            double totalCost = basePrice * noOfTickets;
+            System.out.println("Total cost of " + noOfTickets + " " + " tickets: Rs." + totalCost);
+        } while (!input.equalsIgnoreCase("Exit"));
+
+    }
+
+Task 4: Class & Object
+//EVENT class
+public class Event {
+	String event_name;
+	String event_date; 
+	String event_time;
+	String venue_name; 
+	int total_seats;
+	int available_seats; 
+	double ticket_price; 
+	String event_type;
+	
+	
+	Event(){
+		event_name="Movie Night";
+		event_date="2024-05-01"; 
+		event_time="18:00";
+		venue_name="Cinema"; 
+		total_seats=100;
+		available_seats=10; 
+		ticket_price=10.0; 
+		event_type="Movie";
+		
+	}
+	
+	public Event(String event_name,String event_date,String event_time,String venue_name,int total_seats,int available_seats,double ticket_price,String event_type){
+		this.event_name=event_name;
+		this.event_date=event_date; 
+		this.event_time=event_time;
+		this.venue_name=venue_name; 
+		this.total_seats=total_seats;
+		this.available_seats=available_seats; 
+		this.ticket_price=ticket_price; 
+		this.event_type=event_type;
+	}
+		
+	public String getEvent_name() {
+		return event_name;
+	}
+
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
+
+	public String getEvent_date() {
+		return event_date;
+	}
+
+	public void setEvent_date(String event_date) {
+		this.event_date = event_date;
+	}
+
+	public String getEvent_time() {
+		return event_time;
+	}
+
+	public void setEvent_time(String event_time) {
+		this.event_time = event_time;
+	}
+
+	public String getVenue_name() {
+		return venue_name;
+	}
+
+	public void setVenue_name(String venue_name) {
+		this.venue_name = venue_name;
+	}
+
+	public int getTotal_seats() {
+		return total_seats;
+	}
+
+	public void setTotal_seats(int total_seats) {
+		this.total_seats = total_seats;
+	}
+
+	public int getAvailable_seats() {
+		return available_seats;
+	}
+
+	public void setAvailable_seats(int available_seats) {
+		this.available_seats = available_seats;
+	}
+
+	public double getTicket_price() {
+		return ticket_price;
+	}
+
+	public void setTicket_price(double ticket_price) {
+		this.ticket_price = ticket_price;
+	}
+
+	public String getEvent_type() {
+		return event_type;
+	}
+
+	public void setEvent_type(String event_type) {
+		this.event_type = event_type;
+	}
+	
+	
+	public double calculate_total_revenue(){
+        return ticket_price * (total_seats - available_seats);
+    }
+	
+	public int getBookedNoOfTickets() {
+        return total_seats - available_seats;
+    }
+	
+	
+	public void book_tickets(int num_tickets){
+	
+		if (num_tickets <= available_seats) {
+            available_seats -= num_tickets;
+            System.out.println(num_tickets + " tickets booked successfully.");
+        } 
+		else {
+            System.out.println("Not enough available seats to book " + num_tickets + " tickets.");
+        }
+	}
+	
+	public void cancel_booking(int num_tickets) {
+        available_seats += num_tickets;                                            
+        System.out.println(num_tickets + " tickets canceled successfully.");
+			
+        }
+	
+	public void display_event_details() {
+		System.out.println("Event Name: " + event_name);
+        System.out.println("Event Date: " + event_date);
+        System.out.println("Event Time: " + event_time);
+        System.out.println("Venue Name: " + venue_name);
+        System.out.println("Total Seats: " + total_seats);
+        System.out.println("Available Seats: " + available_seats);
+        System.out.println("Ticket Price: $" + ticket_price);
+        System.out.println("Event Type: " + event_type);
+	}
+	
+}
+
+//Venue class
+public class Venue {
+	String venue_name;
+	String address;
+	Venue(){
+		
+	}
+	Venue(String venue_name, String address){
+		this.venue_name=venue_name;
+		this.address=address;
+	}
+	public String getVenue_name() {
+		return venue_name;
+	}
+	public void setVenue_name(String venue_name) {
+		this.venue_name = venue_name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void display_venue_details() {
+		System.out.println("Venue name: "+venue_name+"Address: "+address);
+	}
+}
+
+//Customer class
+public class Customer {
+	String customer_name;
+    String email;
+    String phone_number;
+    Customer(){
+    	
+    }
+    Customer(String customer_name, String email, String phone_number){
+    	this.customer_name=customer_name;
+    	this.email=email;
+    	this.phone_number=phone_number;
+    	
+    }
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone_number() {
+		return phone_number;
+	}
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+    public void display_customer_details() {
+    	System.out.println("Customer name: "+customer_name+"email: "+email+"phone_number: "+phone_number);
+    }
+}
+
+//Booking class
+import java.util.*;
+public class Booking {
+int booking_id;
+	
+	public Booking() {
+		int booking_id=101;
+    }
+	
+	public Booking(int booking_id) {
+		this.booking_id=booking_id;
+	}
+    public static void main(String[] args) {
+        Event e = new Event();
+        Booking b=new Booking();
+        e.book_tickets(11);
+        b.cancelBooking(100,8);
+        e.display_event_details();
+        int available_tickets = getAvailableNoOfTickets();
+        System.out.println("Available Tickets: " + available_tickets);
+        
+        calculate_booking_cost(10);
+    }
+    
+    public void cancelBooking(int bookingId,int num_tickets) {
+    	Event e=new Event();
+        if (this.booking_id == bookingId) {
+            e.setAvailable_seats(e.getAvailable_seats() + num_tickets);
+            System.out.println(num_tickets + " tickets cancelled successfully.");
+        } else {
+            System.out.println("Invalid booking ID. Unable to cancel tickets.");
+        }
+    }
+    public static int getAvailableNoOfTickets() {
+        Event e = new Event();
+        return e.getAvailable_seats();
+    }
+
+    public static void calculate_booking_cost(int num_tickets) {
+        Event e = new Event();
+        double ticket_price = e.getTicket_price();
+        double total_cost = ticket_price * num_tickets;
+        System.out.println("Total Cost for " + num_tickets + " tickets: " + total_cost);
+    }
+}
+
+Task 5: Inheritance and polymorphism
+
+1.Movie class
+public class Movie extends Event {
+	String genre;
+	String ActorName;
+	String ActressName; 
+
+	Movie(String event_name, String event_date, String event_time, String venue_name, int total_seats,int available_seats, double ticket_price, String event_type,String genre, String ActorName, String ActressName){
+		super(event_name,event_date,event_time,venue_name,total_seats,available_seats,ticket_price,event_type);
+		this.genre=genre;
+		this.ActorName=ActorName;
+		this.ActressName=ActressName;
+
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getActorName() {
+		return ActorName;
+	}
+
+	public void setActorName(String actorName) {
+		ActorName = actorName;
+	}
+
+	public String getActressName() {
+		return ActressName;
+	}
+
+	public void setActressName(String actressName) {
+		ActressName = actressName;
+	}
+	public String toString() {
+		return super.toString()+ "Movie [genre=" + genre + ", ActorName=" + ActorName + ", ActressName=" + ActressName + "]";
+	}
+	
+	public void display_event_details() {
+		super.display_event_details();
+		System.out.println( "Movie [genre=" + genre + ", ActorName=" + ActorName + ", ActressName=" + ActressName + "]");
+	}
+}
+
+2.Concert class
+public class Concert extends Event {
+	
+	String artist; 
+	String type;
+	Concert(String event_name, String event_date, String event_time, String venue_name, int total_seats,int available_seats, double ticket_price, String event_type,String artist, String type){
+		
+		super(event_name,event_date,event_time,venue_name,total_seats,available_seats,ticket_price,event_type);
+		this.artist=artist;
+		this.type=type;
+
+	}
+
+	public String getArtist() {
+		return artist;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String toString() {
+		return super.toString()+"Concert [artist=" + artist + ", type=" + type + "]";
+	}
+
+	public void  display_concert_details(){
+		super.display_concert_details();
+		System.out.println("Concert [artist=" + artist + ", type=" + type + "]");
+	}
+}
+
+3.Sports class
+public class Sports extends Event {
+	
+	String sportName; 
+	String teamsName;
+	Sports(	String event_name, String event_date, String event_time, String venue_name, int total_seats,int available_seats,double ticket_price,String event_type,String sportName,String teamsName){
+		super(event_name,event_date,event_time,venue_name,total_seats,available_seats,ticket_price,event_type);
+		this.sportName=sportName;
+		this.teamsName=teamsName;
+	}
+	public String getSportName() {
+		return sportName;
+	}
+	public void setSportName(String sportName) {
+		this.sportName = sportName;
+	}
+	public String getTeamsName() {
+		return teamsName;
+	}
+	public void setTeamsName(String teamsName) {
+		this.teamsName = teamsName;
+	}
+	public String toString() {
+		return super.toString()+"Sports [sportName=" + sportName + ", teamsName=" + teamsName + "]";
+	}
+	
+	public void display_sport_details() {
+		super.display_sport_details();
+		System.out.println("Sports [sportName=" + sportName + ", teamsName=" + teamsName + "]");
+	}
+}
+
+4.
+
+Task 6: Abstraction
+// same classes from task 5 with abstraction classes
+
+
+Task 9:Exceptions
+
+// EventNotFoundException
+class EventNotFoundException extends Exception {
+    public EventNotFoundException(String message) {
+        super(message);
+    }
+}
+
+// InvalidBookingIDException
+class InvalidBookingIDException extends Exception {
+    public InvalidBookingIDException(String message) {
+        super(message);
+    }
+}
